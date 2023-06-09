@@ -31,6 +31,11 @@ def login_view(request):
         return render(request, "auctions/login.html")
 
 
+def createListing(request):
+    if request.method == "GET":
+        return render(request, "createlisting.html")
+
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
