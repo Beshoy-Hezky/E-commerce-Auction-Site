@@ -33,7 +33,7 @@ def login_view(request):
 
 def createListing(request):
     if request.method == "GET":
-        return render(request, "createlisting.html")
+        return render(request, "auctions/createlisting.html")
 
 
 def logout_view(request):
