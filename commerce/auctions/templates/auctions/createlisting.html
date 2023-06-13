@@ -2,12 +2,33 @@
 
 {% block body %}
     <h2>Create Listing</h2>
-
-    <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<form action="{%  url 'create' %}" method="post">
+    {% csrf_token %}
+  <div class="form-group" style="max-width: 1050px;">
+    <label for="title">Title:</label>
+    <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Insert Title">
   </div>
-
-    TODO
+  <div class="form-group" style="max-width: 1050px;">
+    <label for="description">Description:</label>
+    <textarea type="text" name="description" class=" form-control" id="exampleFormControlTextarea1" placeholder="Insert Description" ></textarea>
+  </div>
+    <div class="form-group" style="max-width: 1050px;">
+    <label for="price">Starting Price:</label>
+    <input type="number" name="price" class="form-control" id="exampleFormControlInput1" placeholder="Insert Starting Price">
+  </div>
+  <div class="form-group" style="max-width: 1050px;">
+    <label for="image_url">Starting Price:</label>
+    <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1" placeholder="Insert Image URL">
+  </div>
+    <div class="form-group" style="max-width: 1050px; padding-top: 10px;">
+        <label for="categories">Choose a category:</label>
+  <select name="categories">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+    </div>
+        <button type="submit">Create</button>
+</form>
 {% endblock %}
