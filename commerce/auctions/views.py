@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from .models import User, Category, AuctionListing
 
 from .models import User
 
@@ -33,7 +34,36 @@ def login_view(request):
 
 def createListing(request):
     if request.method == "GET":
-        return render(request, "auctions/createlisting.html")
+        categories = Category.objects.all()
+        return render(request, "auctions/createlisting.html", {
+            "categories": categories
+        })
+    else:
+        # Get data from the form
+        title = request.POST["title"]
+        description = request.POST["description"]
+        price = request.POST["price"]
+        image_url = request.POST["image_url"]
+        category = request.POST["category"]
+        user = request.user
+
+        # Now you need the category object itself from the database
+        category_obj = Category.objects.get(name=category)
+        # Create new listing
+        aListing = AuctionListing(
+            header=title,
+            description=description,
+            image_url=image_url,
+            category=category_obj,
+            starting_price=float(price),
+            seller=user
+        )
+
+        # This will save
+        aListing.save()
+        return HttpResponseRedirect(reverse(index))
+
+
 
 
 def logout_view(request):
