@@ -9,7 +9,11 @@ from .models import User
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    categories = Category.objects.all()
+    return render(request, "auctions/index.html", {
+        "categories": categories
+    })
+
 
 
 def login_view(request):

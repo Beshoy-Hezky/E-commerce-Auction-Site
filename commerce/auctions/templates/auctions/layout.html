@@ -23,9 +23,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" onclick="return false;">Categories</a>
                     <div class="dropdown-content">
-                        <a class="dropdown-item" href="#" style="color: black;">Dropdown Item 1</a>
-                        <a class="dropdown-item" href="#" style="color: black;">Dropdown Item 2</a>
-                        <a class="dropdown-item" href="#" style="color: black;">Dropdown Item 3</a>
+                        {% for category in categories %}
+                        <a class="dropdown-item" href="#" style="color: black;">{{ category }}</a>
+                        {% endfor %}
                     </div>
                 </li>
                 {% if user.is_authenticated %}
