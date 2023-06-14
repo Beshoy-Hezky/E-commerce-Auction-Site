@@ -61,3 +61,7 @@ button:active {
    text-decoration-skip-ink: none;
   font-weight: 300;
 }
+
+input{
+  max-width: 1050px;
+}

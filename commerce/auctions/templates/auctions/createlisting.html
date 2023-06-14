@@ -4,23 +4,23 @@
     <h2 class="page-header">Create Listing</h2>
 <form action="{%  url 'create' %}" method="post">
     {% csrf_token %}
-  <div class="form-group" style="max-width: 1050px;">
+  <div class="form-group">
     <label for="title">Title:</label>
     <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Insert Title">
   </div>
-  <div class="form-group" style="max-width: 1050px;">
+  <div class="form-group">
     <label for="description">Description:</label>
     <textarea type="text" name="description" class=" form-control" id="exampleFormControlTextarea1" placeholder="Insert Description" ></textarea>
   </div>
-    <div class="form-group" style="max-width: 1050px;">
+    <div class="form-group">
     <label for="price">Starting Price:</label>
     <input type="number" name="price" class="form-control" id="exampleFormControlInput1" placeholder="Insert Starting Price">
   </div>
-  <div class="form-group" style="max-width: 1050px;">
+  <div class="form-group">
     <label for="image_url">Image URL: (Please insert only 1:1 ratio images so it can look decent. Ex: 1024x1024)</label>
     <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1" placeholder="Insert Image URL (1:1 ratio images please)">
   </div>
-    <div class="form-group" style="max-width: 1050px; padding-top: 10px;">
+    <div class="form-group" style=" padding-top: 10px;">
         <label for="category">Choose a category:</label>
   <select name="category">
       {% for category in categories %}
