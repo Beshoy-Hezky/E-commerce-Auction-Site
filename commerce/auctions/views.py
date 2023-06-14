@@ -9,16 +9,17 @@ from .models import User
 
 
 def index(request):
+    listings = AuctionListing.objects.all()
     categories = Category.objects.all()
     return render(request, "auctions/index.html", {
-        "categories": categories
+        "categories": categories,
+        "listings":listings
     })
-
 
 
 def login_view(request):
     if request.method == "POST":
-
+        categories = Category.objects.all()
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -30,10 +31,14 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "Invalid username and/or password.",
+                "categories":categories
             })
     else:
-        return render(request, "auctions/login.html")
+        categories = Category.objects.all()
+        return render(request, "auctions/login.html", {
+            "categories": categories
+        })
 
 
 def createListing(request):
@@ -76,6 +81,7 @@ def logout_view(request):
 
 
 def register(request):
+    categories = Category.objects.all()
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -85,7 +91,8 @@ def register(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "auctions/register.html", {
-                "message": "Passwords must match."
+                "message": "Passwords must match.",
+                "categories": categories
             })
 
         # Attempt to create new user
@@ -94,9 +101,12 @@ def register(request):
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
-                "message": "Username already taken."
+                "message": "Username already taken.",
+                "categories": categories
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
-        return render(request, "auctions/register.html")
+        return render(request, "auctions/register.html",{
+            "categories": categories
+        })
