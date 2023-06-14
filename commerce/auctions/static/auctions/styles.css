@@ -58,12 +58,6 @@ button:active {
 
 .page-header{
   text-decoration: underline;
+   text-decoration-skip-ink: none;
   font-weight: 300;
-}
-
-.hundred-chars{
-  width: 100ch;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
