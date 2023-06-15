@@ -13,6 +13,7 @@ class User(AbstractUser):
 
 
 class AuctionListing(models.Model):
+    listing_id = models.IntegerField(primary_key=True)
     header = models.CharField(max_length=64)
     seller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="seller")
     image_url = models.CharField(max_length=5000)
