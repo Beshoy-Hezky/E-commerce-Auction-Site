@@ -9,5 +9,5 @@ An eBay-like e-commerce auction site that will allow users to post auction listi
 - | 02 | User should view all the current listings        |  6-6-2023 | 15-6-2023 |  Complete   |
 - | 03 | Each listing should have a more descriptive page |  6-6-2023 |           |  Incomplete |
 - | 04 | User should be able to visit a watchlist page    |  6-6-2023 |           |  Incomplete |
-- | 05 | Auction listings are split into categories       |  6-6-2023 |           |  Incomplete |
-- | 06 | Django Admin Interface with administrative power |  6-6-2023 |           |  Incomplete |
+- | 05 | Auction listings are split into categories       |  6-6-2023 | 15-6-2023 |  Complete   |
+- | 06 | Django Admin Interface with administrative power |  6-6-2023 |  7-6-2023 |  Complete   |
