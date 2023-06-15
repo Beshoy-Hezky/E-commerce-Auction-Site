@@ -74,9 +74,17 @@ def createListing(request):
 
 
 def category_finder(request, category):
+    # Capitalize the first letter since all categories are capitalized and it would be stupid to
+    # distinguish between "action" and "Action"
+    category = category.capitalize()
+    # This is needed for the categories dropdown in the navbar
     categories = Category.objects.all()
     # Get actual object
-    category_obj = Category.objects.get(name=category)
+    try:
+        category_obj = Category.objects.get(name=category)
+    except:
+        category_obj = Category.objects.get(name="Other")
+        category = "Other"
     # Filter only the needed ones
     listings = AuctionListing.objects.filter(category=category_obj)
     return render(request, "auctions/category.html", {
