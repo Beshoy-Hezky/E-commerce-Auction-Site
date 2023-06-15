@@ -73,6 +73,17 @@ def createListing(request):
         return HttpResponseRedirect(reverse(index))
 
 
+def category_finder(request, category):
+    categories = Category.objects.all()
+    # Get actual object
+    category_obj = Category.objects.get(name=category)
+    # Filter only the needed ones
+    listings = AuctionListing.objects.filter(category=category_obj)
+    return render(request, "auctions/category.html", {
+        "header_category": category,
+        "categories": categories,
+        "listings": listings
+    })
 
 
 def logout_view(request):
