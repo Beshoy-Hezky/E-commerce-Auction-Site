@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="page-header">{{ header_category }}</h2>
+    {% for listing in listings %}
+        {% if listing.is_live == True %}
+
+    <div class="card" style="width: 18rem; display: inline-block; margin-right: 10px; margin-bottom: 10px;">
+  <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" width="286" height="286">
+  <div class="card-body">
+    <h5 class="card-title">{{ listing.header }} ({{ listing.category }})</h5>
+      <!-- Maximum 50 chars -->
+     <p class="card-text">
+  {% if listing.description|length > 112 %}
+    {{ listing.description|slice:":112" }}...
+  {% else %}
+    {{ listing.description }}
+  {% endif %}
+    </p>
+
+
+      <div class="row d-flex justify-content-between">
+          <button><a href="#" style="color:black;
+        text-decoration: none">Details</a></button>
+          <h6>Current Price:<br>{{ listing.starting_price }}$</h6>
+      </div>
+
+  </div>
+</div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

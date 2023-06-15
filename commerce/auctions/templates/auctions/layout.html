@@ -24,7 +24,7 @@
                     <a class="nav-link" href="#" onclick="return false;">Categories</a>
                     <div class="dropdown-content">
                         {% for category in categories %}
-                        <a class="dropdown-item" href="#" style="color: black;">{{ category }}</a>
+                        <a class="dropdown-item" href="{% url 'category' category=category %}" style="color: black;">{{ category }}</a>
                         {% endfor %}
                     </div>
                 </li>
