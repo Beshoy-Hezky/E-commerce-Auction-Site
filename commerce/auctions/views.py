@@ -17,6 +17,15 @@ def index(request):
     })
 
 
+def individual_listing(request, id):
+    # for the navbar
+    categories = Category.objects.all()
+    listing = AuctionListing.objects.get(id=id)
+    return render(request, "auctions/listing.html", {
+        "categories": categories,
+        "listing": listing
+    })
+
 def login_view(request):
     if request.method == "POST":
         categories = Category.objects.all()

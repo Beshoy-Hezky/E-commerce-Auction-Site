@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="page-header">{{ listing.header }}</h2>
+    <div class="row">
+    <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" style="max-width: 400px; max-height: 400px;">
+    <h5 style="margin-left: 10px;">
+        <div style="font-weight: 350">
+            Seller: {{ listing.seller }}<br><br>
+        Category: {{ listing.category }}<br><br>
+    Current Price/ bid: ${{ listing.starting_price }}
+        </div>
+    </h5>
+    </div>
+
+    <h5 style="margin-top: 10px;">Description: </h5><p>{{ listing.description }} </p>
+
+{% endblock %}
