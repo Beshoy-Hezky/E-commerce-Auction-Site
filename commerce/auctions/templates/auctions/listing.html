@@ -10,11 +10,14 @@
         Category: {{ listing.category }}<br><br>
     Current Price/ bid: ${{ listing.starting_price }}<br><br>
             {% if user.is_authenticated %}
+                <form action="{%  url 'listing' id=listing.id %}" method="post">
+                {% csrf_token %}
                 {% if inwatchlist %}
-                    <button type="button" class="btn btn-outline-danger">Remove from watchlist</button>
+                    <button name="action" value="remove" type="submit" class="btn btn-outline-danger">Remove from watchlist</button>
                 {% else %}
-                    <button type="button" class="btn btn-outline-warning">Add to watchlist</button>
+                    <button name="action" value="add" type="submit" class="btn btn-outline-warning">Add to watchlist</button>
                 {% endif %}
+                </form>
             {% endif %}
         </div>
     </h5>

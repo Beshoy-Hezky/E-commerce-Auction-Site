@@ -18,15 +18,24 @@ def index(request):
 
 
 def individual_listing(request, id):
-    inwatchlist = False
+    listing = AuctionListing.objects.get(id=id)
+    if request.method == "POST":
+        action = request.POST['action']
+        if action == "add":
+            listing.watchlist.add(request.user)
+        elif action == "remove":
+            listing.watchlist.remove(request.user)
+
+    # To check if user who pressed this is in Auctionlisting watchlist
+    inwatchlist = request.user in listing.watchlist.all()
     # for the navbar
     categories = Category.objects.all()
-    listing = AuctionListing.objects.get(id=id)
     return render(request, "auctions/listing.html", {
         "categories": categories,
         "listing": listing,
         "inwatchlist": inwatchlist
     })
+
 
 def login_view(request):
     if request.method == "POST":
