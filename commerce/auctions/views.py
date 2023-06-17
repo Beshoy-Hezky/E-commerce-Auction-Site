@@ -18,12 +18,14 @@ def index(request):
 
 
 def individual_listing(request, id):
+    inwatchlist = False
     # for the navbar
     categories = Category.objects.all()
     listing = AuctionListing.objects.get(id=id)
     return render(request, "auctions/listing.html", {
         "categories": categories,
-        "listing": listing
+        "listing": listing,
+        "inwatchlist": inwatchlist
     })
 
 def login_view(request):

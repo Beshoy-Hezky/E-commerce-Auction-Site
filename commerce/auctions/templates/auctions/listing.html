@@ -8,7 +8,14 @@
         <div style="font-weight: 350">
             Seller: {{ listing.seller }}<br><br>
         Category: {{ listing.category }}<br><br>
-    Current Price/ bid: ${{ listing.starting_price }}
+    Current Price/ bid: ${{ listing.starting_price }}<br><br>
+            {% if user.is_authenticated %}
+                {% if inwatchlist %}
+                    <button type="button" class="btn btn-outline-danger">Remove from watchlist</button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-warning">Add to watchlist</button>
+                {% endif %}
+            {% endif %}
         </div>
     </h5>
     </div>

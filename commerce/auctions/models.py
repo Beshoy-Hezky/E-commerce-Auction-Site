@@ -20,6 +20,7 @@ class AuctionListing(models.Model):
     starting_price = models.FloatField(null=True, blank=True, default=0.0)
     is_live = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name="category")
+    watchlist = models.ManyToManyField(User, blank=True, null=True, related_name="users")
 
     def __str__(self):
        return f"{self.header} ({self.category})"
