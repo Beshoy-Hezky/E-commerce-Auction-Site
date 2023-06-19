@@ -8,7 +8,7 @@
         <div style="font-weight: 350">
             Seller: {{ listing.seller }}<br><br>
         Category: {{ listing.category }}<br><br>
-    Current Price/ bid: ${{ listing.starting_price }}<br><br>
+    Current Price/ bid: ${{ listing.starting_price.value }}<br><br>
             {% if user.is_authenticated %}
                 <form action="{%  url 'listing' id=listing.id %}" method="post">
                 {% csrf_token %}
