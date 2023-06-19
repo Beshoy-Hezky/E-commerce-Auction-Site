@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User, Category, AuctionListing, Bid
+from .models import User, Category, AuctionListing, Bid, Comment
 
 from .models import User
 
@@ -30,6 +30,8 @@ def watchlist(request):
 
 def individual_listing(request, id):
     listing = AuctionListing.objects.get(id=id)
+    # get the comments
+    comments = Comment.objects.filter(item= listing)
     if request.method == "POST":
         action = request.POST['action']
         if action == "add":
@@ -44,7 +46,8 @@ def individual_listing(request, id):
     return render(request, "auctions/listing.html", {
         "categories": categories,
         "listing": listing,
-        "inwatchlist": inwatchlist
+        "inwatchlist": inwatchlist,
+        "comments": comments
     })
 
 
@@ -133,6 +136,16 @@ def category_finder(request, category):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
+
+
+def add_comment(request, id):
+    item = AuctionListing.objects.get(id=id)
+    statement = request.POST["comment"]
+    comment_obj = Comment(item=item, statement=statement, author=request.user)
+    comment_obj.save()
+    return HttpResponseRedirect(reverse("listing",args=(id, )))
+
+
 
 
 def register(request):
