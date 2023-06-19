@@ -23,6 +23,27 @@
     </h5>
     </div>
 
-    <h5 style="margin-top: 10px;">Description: </h5><p>{{ listing.description }} </p>
+    <h5 style="margin-top: 10px;">Description: </h5><p>{{ listing.description }} </p><hr>
+
+        <h4>Comments:</h4>
+    {% for comment in comments %}
+        <div>
+        <h5 style="display: inline">{{ comment.author }}:   </h5> <p style="display: inline">{{ comment.statement }}</p>
+        </div>
+         <br>
+    {% endfor %}
+
+        {% if user.is_authenticated %}
+            <form action="{% url 'add_comment' id=listing.id %}" method="POST">
+            {% csrf_token %}
+                <div class="form-group" style="max-width: 1050px;">
+                    <label for="comment">Add a comment:</label>
+                    <textarea type="text" name="comment" class=" form-control" id="exampleFormControlTextarea1" placeholder="Insert Comment" ></textarea>
+                </div>
+               <button type="submit">Add</button>
+            </form>
+    {% endif %}
+    </div><hr>
+
 
 {% endblock %}
