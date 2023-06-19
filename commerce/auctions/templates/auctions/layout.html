@@ -21,7 +21,7 @@
         <div class="navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" onclick="return false;">Categories</a>
+                    <a class="nav-link" href="#" onclick="return false;">Categories </a>
                     <div class="dropdown-content">
                         {% for category in categories %}
                         <a class="dropdown-item" href="{% url 'category' category=category %}" style="color: black;">{{ category }}</a>
@@ -29,6 +29,9 @@
                     </div>
                 </li>
                 {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' %}">Watchlist <span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'create' %}">Create Listing <span class="sr-only">(current)</span></a>
                 </li>
