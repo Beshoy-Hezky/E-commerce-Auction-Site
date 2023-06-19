@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User, Category, AuctionListing
+from .models import User, Category, AuctionListing, Bid
 
 from .models import User
 
@@ -86,6 +86,9 @@ def createListing(request):
         image_url = request.POST["image_url"]
         category = request.POST["category"]
         user = request.user
+        # Make a bid object
+        bid_obj = Bid(value=float(price), bidder=user)
+        bid_obj.save()
 
         # Now you need the category object itself from the database
         category_obj = Category.objects.get(name=category)
@@ -94,8 +97,10 @@ def createListing(request):
             header=title,
             description=description,
             image_url=image_url,
+            # saving category object since it is a foreign key
             category=category_obj,
-            starting_price=float(price),
+            # saving bid object since it is a foreign key
+            starting_price=bid_obj,
             seller=user
         )
 
