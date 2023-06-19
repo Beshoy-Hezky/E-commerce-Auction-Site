@@ -10,10 +10,21 @@ from .models import User
 
 def index(request):
     listings = AuctionListing.objects.all()
+    # for the navbar
     categories = Category.objects.all()
     return render(request, "auctions/index.html", {
         "categories": categories,
-        "listings":listings
+        "listings": listings
+    })
+
+
+def watchlist(request):
+    listings = request.user.userswatchlist.all()
+    # for the navbar
+    categories = Category.objects.all()
+    return render(request, "auctions/watchlist.html", {
+        "categories": categories,
+        "listings": listings
     })
 
 
