@@ -30,3 +30,12 @@ class AuctionListing(models.Model):
 
     def __str__(self):
         return f"{self.header} ({self.category})"
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="author_messages")
+    item = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, null=True, related_name="comments")
+    statement = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.author} commented {self.statement} on {self.item}"
