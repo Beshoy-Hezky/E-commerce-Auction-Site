@@ -31,4 +31,38 @@
 </div>
         {% endif %}
     {% endfor %}
+
+
+    <h2 class="page-header">Non-Active Listings</h2>
+
+     {% for listing in listings %}
+        {% if listing.is_live == False %}
+
+    <div class="card" style="width: 18rem; display: inline-block; margin-right: 10px; margin-bottom: 10px;">
+  <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" width="286" height="286">
+  <div class="card-body">
+    <h5 class="card-title">{{ listing.header }} ({{ listing.category }})</h5>
+      <!-- Maximum 50 chars -->
+     <p class="card-text">
+  {% if listing.description|length > 112 %}
+    {{ listing.description|slice:":112" }}...
+  {% else %}
+    {{ listing.description }}
+  {% endif %}
+    </p>
+
+
+      <div class="row d-flex justify-content-between">
+          <form action="{% url 'listing' id=listing.id %}" method="get">
+          <button><a href="{% url 'listing' id=listing.id %}" style="color:black;
+        text-decoration: none">More Info</a></button>
+          </form>
+          <h6>Current Price:<br>${{ listing.starting_price.value }}</h6>
+      </div>
+
+  </div>
+</div>
+        {% endif %}
+    {% endfor %}
+
 {% endblock %}
