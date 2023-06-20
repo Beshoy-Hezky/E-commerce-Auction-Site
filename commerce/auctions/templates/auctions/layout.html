@@ -28,6 +28,9 @@
                         {% endfor %}
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'nonActive' %}">Inactive Listings<span class="sr-only">(current)</span></a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'watchlist' %}">Watchlist <span class="sr-only">(current)</span></a>

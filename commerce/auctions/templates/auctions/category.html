@@ -3,7 +3,6 @@
 {% block body %}
     <h2 class="page-header">{{ header_category }}</h2>
     {% for listing in listings %}
-        {% if listing.is_live == True %}
 
     <div class="card" style="width: 18rem; display: inline-block; margin-right: 10px; margin-bottom: 10px;">
   <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" width="286" height="286">

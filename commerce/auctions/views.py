@@ -17,6 +17,15 @@ def index(request):
         "listings": listings
     })
 
+def nonActive(request):
+    listings = AuctionListing.objects.filter(is_live = False)
+    # for the navbar
+    categories = Category.objects.all()
+    return render(request, "auctions/nonActive.html", {
+        "categories": categories,
+        "listings": listings
+    })
+
 
 def watchlist(request):
     listings = request.user.userswatchlist.all()
