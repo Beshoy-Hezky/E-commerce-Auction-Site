@@ -16,6 +16,18 @@
     <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" style="max-width: 400px; max-height: 400px;">
     <h5 style="margin-left: 10px;">
         <div style="font-weight: 350">
+
+        <div style="margin-top: 10px;">
+        {% if request.user == listing.seller %}
+                <form action="{%  url 'remove_listing' id=listing.id %}" method="post">
+                {% csrf_token %}
+                {% if listing.is_live %}
+                    <button type="submit" class="btn btn-danger">Stop Auction</button>
+                {% endif %}
+                </form>
+            {% endif %}
+        </div>
+
         <div style="margin-top: 10px;">
         {% if user.is_authenticated %}
                 <form action="{%  url 'listing' id=listing.id %}" method="post">

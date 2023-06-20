@@ -178,6 +178,14 @@ def add_bid(request, id):
     })
 
 
+def remove_listing(request, id):
+    if request.method == "POST":
+        listing = AuctionListing.objects.get(id=id)
+        listing.is_live = False
+        listing.save()
+        return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("index"))
+
 def register(request):
     categories = Category.objects.all()
     if request.method == "POST":
