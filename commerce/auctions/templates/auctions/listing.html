@@ -1,15 +1,23 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+    {% if update_bid == True %}
+    <div class="alert alert-success" role="alert">
+        Bid updated successfully!!
+    </div>
+    {% endif %}
+    {% if update_bid == False %}
+        <div class="alert alert-danger" role="alert">
+            Your bid has to be greater than ${{ listing.starting_price.value }}
+        </div>
+    {% endif %}
     <h2 class="page-header">{{ listing.header }}</h2>
     <div class="row">
     <img src="{{listing.image_url}}" class="card-img-top" alt="Picture of {{ listing.header }}" style="max-width: 400px; max-height: 400px;">
     <h5 style="margin-left: 10px;">
         <div style="font-weight: 350">
-            Seller: {{ listing.seller }}<br><br>
-        Category: {{ listing.category }}<br><br>
-    Current Price/ bid: ${{ listing.starting_price.value }}<br><br>
-            {% if user.is_authenticated %}
+        <div style="margin-top: 10px;">
+        {% if user.is_authenticated %}
                 <form action="{%  url 'listing' id=listing.id %}" method="post">
                 {% csrf_token %}
                 {% if inwatchlist %}
@@ -18,10 +26,25 @@
                     <button name="action" value="add" type="submit" class="btn btn-outline-warning">Add to watchlist</button>
                 {% endif %}
                 </form>
-            {% endif %}
+            {% endif %} <br>
+        </div>
+            Seller: {{ listing.seller }}<br><br>
+        Category: {{ listing.category }}<br><br>
+    Current Price/ bid: ${{ listing.starting_price.value }}<br><br>
+         {% if user.is_authenticated %}
+            <form action="{% url 'add_bid' id=listing.id %}" method="POST">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input type="number" name="bid" class="form-control" id="exampleFormControlInput1" placeholder="Insert Bid">
+                </div>
+               <button type="submit">Bid</button>
+            </form>
+    {% endif %}
         </div>
     </h5>
     </div>
+
+
 
     <h5 style="margin-top: 10px;">Description: </h5><p>{{ listing.description }} </p><hr>
 
