@@ -29,6 +29,8 @@ def watchlist(request):
 
 
 def individual_listing(request, id):
+    # variable to hold if bid is going to be updated or not
+    update_bid = None
     listing = AuctionListing.objects.get(id=id)
     # get the comments
     comments = Comment.objects.filter(item= listing)
@@ -47,7 +49,8 @@ def individual_listing(request, id):
         "categories": categories,
         "listing": listing,
         "inwatchlist": inwatchlist,
-        "comments": comments
+        "comments": comments,
+        "update_bid": update_bid
     })
 
 
@@ -146,6 +149,33 @@ def add_comment(request, id):
     return HttpResponseRedirect(reverse("listing",args=(id, )))
 
 
+def add_bid(request, id):
+    item = AuctionListing.objects.get(id=id)
+    # get the comments
+    comments = Comment.objects.filter(item=item)
+    # To check if user who pressed this is in Auctionlisting watchlist
+    inwatchlist = request.user in item.watchlist.all()
+    # This is needed for the categories dropdown in the navbar
+    categories = Category.objects.all()
+    bid = float(request.POST["bid"])
+    if bid > item.starting_price.value:
+        # variable to hold if bid is going to be updated or not
+        update_bid = True
+        bid_obj = Bid(value=bid, bidder=request.user)
+        bid_obj.save()
+        item.starting_price = bid_obj
+        item.save()
+    else:
+        # variable to hold if bid is going to be updated or not
+        update_bid = False
+
+    return render(request, "auctions/listing.html", {
+        "categories": categories,
+        "listing": item,
+        "inwatchlist": inwatchlist,
+        "comments": comments,
+        "update_bid": update_bid
+    })
 
 
 def register(request):
