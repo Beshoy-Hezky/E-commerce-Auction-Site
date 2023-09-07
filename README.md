@@ -3,7 +3,7 @@ An eBay-like e-commerce auction web app that will allow users to post auction li
 
 [Click here to see video](https://youtu.be/bwa3893hbU0?si=7EWzEMn36iyCwZGS)
 
-[Click here to see webapp](beshoyhezky.pythonanywhere.com/)
+[Click here to see webapp](http://beshoyhezky.pythonanywhere.com/)
 
 # Product Backlog
 
